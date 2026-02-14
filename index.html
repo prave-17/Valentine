@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Will You Be My Valentine?</title>
 
+<meta name="robots" content="noindex, nofollow">
+
 <style>
 body {
   margin: 0;
@@ -25,14 +27,17 @@ body {
   max-width: 380px;
   text-align: center;
   box-shadow: 0 18px 45px rgba(0,0,0,0.25);
-  animation: fadeIn 1.5s ease;
+  animation: fadeIn 1.4s ease;
 }
 
 .hidden { display: none; }
 
 h2 { color: #d6336c; margin-bottom: 10px; }
 
-p { font-size: 16px; line-height: 1.5; }
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
 
 button {
   padding: 10px 18px;
@@ -67,7 +72,7 @@ img {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -103,14 +108,14 @@ img {
   <span style="left:90%">❤️</span>
 </div>
 
-<!-- CARD -->
+<!-- VALENTINE CARD -->
 <div class="container" id="card">
   <h2>Will you be my Valentine? 💌</h2>
   <button id="yes">Yes 💖</button>
   <button id="no">No 💔</button>
 </div>
 
-<!-- MESSAGE -->
+<!-- MESSAGE (TEXT ONLY – NO IMAGE) -->
 <div class="container hidden" id="message">
   <p>
     From the moment you walked into my life, <strong>Nandhini</strong>,  
@@ -140,58 +145,61 @@ const steps = [
   { t:"👰🤵 Marriage", img:"marriag.jpeg", d:"And finally… we chose each other, for a lifetime." }
 ];
 
-
 let i = 0;
 
 function burst() {
-  for (let j=0;j<12;j++) {
-    const h=document.createElement("div");
-    h.className="burst-heart";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"vw";
-    h.style.top="70%";
+  for (let j = 0; j < 12; j++) {
+    const h = document.createElement("div");
+    h.className = "burst-heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.top = "70%";
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),1500);
+    setTimeout(() => h.remove(), 1500);
   }
 }
 
 noBtn.onmouseover = () => {
-  noBtn.style.left = Math.random()*120-60+"px";
-  noBtn.style.top  = Math.random()*120-60+"px";
+  noBtn.style.left = Math.random() * 120 - 60 + "px";
+  noBtn.style.top  = Math.random() * 120 - 60 + "px";
 };
 
 document.getElementById("yes").onclick = () => {
   music.play();
   burst();
   card.classList.add("hidden");
-  setTimeout(()=>message.classList.remove("hidden"),600);
-  setTimeout(()=>{
-  message.classList.add("hidden");
-  journey.classList.remove("hidden");
-  i = 0;        // force reset
-  load();
-  },3500);
+
+  setTimeout(() => {
+    message.classList.remove("hidden");
+  }, 600);
+
+  setTimeout(() => {
+    message.classList.add("hidden");
+    journey.classList.remove("hidden");
+    i = 0;      // FORCE RESET
+    load();
+  }, 3500);
 };
 
-function load(){
-  title.innerText=steps[i].t;
-  photo.src=steps[i].img;
-  text.innerText=steps[i].d;
+function load() {
+  title.innerText = steps[i].t;
+  photo.src = steps[i].img;
+  text.innerText = steps[i].d;
 }
 
-next.onclick=()=>{
+next.onclick = () => {
   burst();
   i++;
-  if(i<steps.length) load();
-  else {
-    journey.innerHTML="<h2>Happy Valentine’s Day ❤️</h2><p>Forever begins with us.</p>";
+  if (i < steps.length) {
+    load();
+  } else {
+    journey.innerHTML = `
+      <h2>Happy Valentine’s Day ❤️</h2>
+      <p>Forever begins with us.</p>
+    `;
   }
 };
 </script>
 
 </body>
 </html>
-
-
-
-
