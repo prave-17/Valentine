@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Will You Be My Valentine?</title>
 
 <style>
@@ -10,7 +10,7 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,115 +18,82 @@ body {
 }
 
 .container {
-  text-align: center;
   background: white;
-  padding: 25px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 360px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  padding: 22px;
+  border-radius: 18px;
+  width: 92%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+  animation: fadeIn 1.5s ease;
 }
 
-.envelope {
-  width: 200px;
-  height: 120px;
-  background: #ff6f91;
-  margin: 0 auto 20px;
-  position: relative;
-  border-radius: 8px;
-  cursor: pointer;
-}
+.hidden { display: none; }
 
-.envelope::before {
-  content: "";
-  position: absolute;
-  top: -60px;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 100px solid transparent;
-  border-right: 100px solid transparent;
-  border-bottom: 60px solid #ff9671;
-}
+h2 { color: #d6336c; margin-bottom: 10px; }
 
-h2 {
-  margin: 10px 0;
-  color: #333;
-}
-
-.buttons {
-  margin-top: 15px;
-}
+p { font-size: 16px; line-height: 1.5; }
 
 button {
   padding: 10px 18px;
-  font-size: 16px;
+  border-radius: 22px;
   border: none;
-  border-radius: 20px;
+  font-size: 16px;
   cursor: pointer;
-  margin: 8px;
+  margin: 10px;
 }
 
-#yes {
-  background: #ff4d6d;
-  color: white;
-}
+#yes { background: #ff4d6d; color: white; }
+#no  { background: #ddd; position: relative; }
 
-#no {
-  background: #ddd;
-  position: relative;
+img {
+  width: 100%;
+  border-radius: 14px;
+  margin: 12px 0;
+  animation: zoom 12s ease-in-out infinite;
 }
 
 .hearts span {
   position: fixed;
   bottom: -20px;
-  font-size: 20px;
+  font-size: 22px;
   animation: float 10s ease-in infinite;
   opacity: 0.7;
 }
 
 @keyframes float {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-100vh); }
+  from { transform: translateY(0); }
+  to { transform: translateY(-110vh); }
 }
 
-.hidden {
-  display: none;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-img {
-  width: 100%;
-  border-radius: 14px;
-  margin-top: 15px;
-}
-
-.romantic {
-  font-size: 17px;
-  margin-top: 12px;
-  color: #d6336c;
+@keyframes zoom {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 .burst-heart {
   position: fixed;
-  font-size: 24px;
+  font-size: 26px;
   animation: burst 1.5s ease-out forwards;
 }
 
 @keyframes burst {
-  0% {
-    transform: scale(0.5) translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2) translateY(-150px);
-    opacity: 0;
-  }
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2) translateY(-150px); opacity: 0; }
 }
-
 </style>
 </head>
 
 <body>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_48cba6c7b1.mp3?filename=romantic-piano-112191.mp3">
+</audio>
 
 <div class="hearts">
   <span style="left:10%">❤️</span>
@@ -136,79 +103,90 @@ img {
   <span style="left:90%">❤️</span>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_48cba6c7b1.mp3?filename=romantic-piano-112191.mp3" type="audio/mpeg">
-</audio>
-
-
+<!-- CARD -->
 <div class="container" id="card">
-  <div class="envelope"></div>
   <h2>Will you be my Valentine? 💌</h2>
-
-  <div class="buttons">
-    <button id="yes">Yes 💖</button>
-    <button id="no">No 💔</button>
-  </div>
+  <button id="yes">Yes 💖</button>
+  <button id="no">No 💔</button>
 </div>
 
-<div class="container hidden" id="yesPage">
-  <img src="photo.JPG" alt="Us">
-  <div class="romantic">
-    From the moment you walked into my life, every heartbeat found its reason.  
+<!-- MESSAGE -->
+<div class="container hidden" id="message">
+  <img src="engagement.jpg">
+  <p>
+    From the moment you walked into my life, <strong>Nandhini</strong>,  
+    every heartbeat found its reason.  
     This letter asks the question… but my heart already chose you. 💖
-  </div>
+  </p>
 </div>
 
-<div class="container hidden" id="noPage">
-  <img src="https://i.imgur.com/8Km9tLL.png" alt="Crying Baby">
-  <div class="romantic">Oh nooo… my heart just dropped 😭</div>
+<!-- JOURNEY -->
+<div class="container hidden" id="journey">
+  <h2 id="title"></h2>
+  <img id="photo">
+  <p id="text"></p>
+  <button id="next">Next 💖</button>
 </div>
 
 <script>
-const card = document.getElementById("card");
-const yesPage = document.getElementById("yesPage");
-const noPage = document.getElementById("noPage");
+const music = document.getElementById("music");
 const noBtn = document.getElementById("no");
-const music = document.getElementById("bgMusic");
 
-function heartBurst() {
-  for (let i = 0; i < 12; i++) {
-    const heart = document.createElement("div");
-    heart.className = "burst-heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = "70%";
-    document.body.appendChild(heart);
+const steps = [
+  { t:"💫 First Date", img:"first-date.jpg", d:"The day two strangers met… and something quietly beautiful began." },
+  { t:"🥂 First Event Together", img:"first-event.jpg", d:"Our first step into the world — side by side, as one." },
+  { t:"👨‍👩‍👧 Family Meet", img:"family-meet.jpg", d:"When our worlds met, and hearts felt at home." },
+  { t:"💍 Engagement", img:"engagement.jpg", d:"A promise made — not just with rings, but with forever." },
+  { t:"📸 Care", img:"care.jpg", d:"In the smallest moments, love showed itself." },
+  { t:"👰🤵 Marriage", img:"marriage.jpg", d:"And finally… we chose each other, for a lifetime." }
+];
 
-    setTimeout(() => heart.remove(), 1500);
+let i = 0;
+
+function burst() {
+  for (let j=0;j<12;j++) {
+    const h=document.createElement("div");
+    h.className="burst-heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top="70%";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1500);
   }
 }
 
-noBtn.addEventListener("mouseover", () => {
-  noBtn.style.left = Math.random() * 120 - 60 + "px";
-  noBtn.style.top = Math.random() * 120 - 60 + "px";
-});
+noBtn.onmouseover = () => {
+  noBtn.style.left = Math.random()*120-60+"px";
+  noBtn.style.top  = Math.random()*120-60+"px";
+};
 
-document.getElementById("yes").addEventListener("click", () => {
-  music.play();          // music starts on interaction
-  heartBurst();          // heart explosion
+document.getElementById("yes").onclick = () => {
+  music.play();
+  burst();
   card.classList.add("hidden");
+  setTimeout(()=>message.classList.remove("hidden"),600);
+  setTimeout(()=>{
+    message.classList.add("hidden");
+    journey.classList.remove("hidden");
+    load();
+  },3000);
+};
 
-  setTimeout(() => {
-    yesPage.classList.remove("hidden");
-  }, 600);
-});
+function load(){
+  title.innerText=steps[i].t;
+  photo.src=steps[i].img;
+  text.innerText=steps[i].d;
+}
 
-document.getElementById("no").addEventListener("click", () => {
-  card.classList.add("hidden");
-  noPage.classList.remove("hidden");
-});
+next.onclick=()=>{
+  burst();
+  i++;
+  if(i<steps.length) load();
+  else {
+    journey.innerHTML="<h2>Happy Valentine’s Day ❤️</h2><p>Forever begins with us.</p>";
+  }
+};
 </script>
-
-
 
 </body>
 </html>
-
-
-
