@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Will You Be My Valentine?</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.envelope {
+  width: 200px;
+  height: 120px;
+  background: #ff6f91;
+  margin: 0 auto 20px;
+  position: relative;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 60px solid #ff9671;
+}
+
+h2 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.buttons {
+  margin-top: 15px;
+}
+
+button {
+  padding: 10px 18px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 8px;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #ddd;
+  position: relative;
+}
+
+.hearts span {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100vh); }
+}
+
+.hidden {
+  display: none;
+}
+
+img {
+  width: 100%;
+  border-radius: 14px;
+  margin-top: 15px;
+}
+
+.romantic {
+  font-size: 17px;
+  margin-top: 12px;
+  color: #d6336c;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts">
+  <span style="left:10%">❤️</span>
+  <span style="left:30%">💖</span>
+  <span style="left:50%">💕</span>
+  <span style="left:70%">💗</span>
+  <span style="left:90%">❤️</span>
+</div>
+
+<div class="container" id="card">
+  <div class="envelope"></div>
+  <h2>Will you be my Valentine? 💌</h2>
+
+  <div class="buttons">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 💔</button>
+  </div>
+</div>
+
+<div class="container hidden" id="yesPage">
+  <img src="photo.jpg" alt="Us">
+  <div class="romantic">
+    From the moment you walked into my life, every heartbeat found its reason.  
+    This letter asks the question… but my heart already chose you. 💖
+  </div>
+</div>
+
+<div class="container hidden" id="noPage">
+  <img src="https://i.imgur.com/8Km9tLL.png" alt="Crying Baby">
+  <div class="romantic">Oh nooo… my heart just dropped 😭</div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.left = Math.random() * 120 - 60 + "px";
+  noBtn.style.top = Math.random() * 120 - 60 + "px";
+});
+
+document.getElementById("yes").onclick = () => {
+  card.classList.add("hidden");
+  yesPage.classList.remove("hidden");
+};
+
+document.getElementById("no").onclick = () => {
+  card.classList.add("hidden");
+  noPage.classList.remove("hidden");
+};
+</script>
+
+</body>
+</html>
