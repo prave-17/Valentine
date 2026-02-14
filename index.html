@@ -81,7 +81,7 @@ button {
   position: fixed;
   bottom: -20px;
   font-size: 20px;
-  animation: float 6s linear infinite;
+  animation: float 10s ease-in infinite;
   opacity: 0.7;
 }
 
@@ -105,6 +105,24 @@ img {
   margin-top: 12px;
   color: #d6336c;
 }
+
+.burst-heart {
+  position: fixed;
+  font-size: 24px;
+  animation: burst 1.5s ease-out forwards;
+}
+
+@keyframes burst {
+  0% {
+    transform: scale(0.5) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2) translateY(-150px);
+    opacity: 0;
+  }
+}
+
 </style>
 </head>
 
@@ -117,6 +135,11 @@ img {
   <span style="left:70%">💗</span>
   <span style="left:90%">❤️</span>
 </div>
+
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_48cba6c7b1.mp3?filename=romantic-piano-112191.mp3" type="audio/mpeg">
+</audio>
+
 
 <div class="container" id="card">
   <div class="envelope"></div>
@@ -146,6 +169,20 @@ const card = document.getElementById("card");
 const yesPage = document.getElementById("yesPage");
 const noPage = document.getElementById("noPage");
 const noBtn = document.getElementById("no");
+const music = document.getElementById("bgMusic");
+
+function heartBurst() {
+  for (let i = 0; i < 12; i++) {
+    const heart = document.createElement("div");
+    heart.className = "burst-heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = "70%";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1500);
+  }
+}
 
 noBtn.addEventListener("mouseover", () => {
   noBtn.style.left = Math.random() * 120 - 60 + "px";
@@ -153,8 +190,13 @@ noBtn.addEventListener("mouseover", () => {
 });
 
 document.getElementById("yes").addEventListener("click", () => {
+  music.play();          // music starts on interaction
+  heartBurst();          // heart explosion
   card.classList.add("hidden");
-  yesPage.classList.remove("hidden");
+
+  setTimeout(() => {
+    yesPage.classList.remove("hidden");
+  }, 600);
 });
 
 document.getElementById("no").addEventListener("click", () => {
@@ -164,7 +206,9 @@ document.getElementById("no").addEventListener("click", () => {
 </script>
 
 
+
 </body>
 </html>
+
 
 
