@@ -112,7 +112,6 @@ img {
 
 <!-- MESSAGE -->
 <div class="container hidden" id="message">
-  <img src="engagemet.jpeg">
   <p>
     From the moment you walked into my life, <strong>Nandhini</strong>,  
     every heartbeat found its reason.  
@@ -167,10 +166,11 @@ document.getElementById("yes").onclick = () => {
   card.classList.add("hidden");
   setTimeout(()=>message.classList.remove("hidden"),600);
   setTimeout(()=>{
-    message.classList.add("hidden");
-    journey.classList.remove("hidden");
-    load();
-  },3000);
+  message.classList.add("hidden");
+  journey.classList.remove("hidden");
+  i = 0;        // force reset
+  load();
+  },3500);
 };
 
 function load(){
@@ -191,6 +191,7 @@ next.onclick=()=>{
 
 </body>
 </html>
+
 
 
 
