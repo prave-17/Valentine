@@ -6,45 +6,51 @@
 <title>Our Journey ❤️</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Poppins, sans-serif;
-  background: linear-gradient(135deg,#ffdde1,#ee9ca7);
-  min-height: 100vh;
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
-.container {
-  background:white;
+.container{
+  background:#fff;
   width:92%;
   max-width:380px;
   padding:22px;
   border-radius:18px;
   text-align:center;
   box-shadow:0 18px 40px rgba(0,0,0,.25);
+  animation:fade .8s ease;
 }
 
-.hidden { display:none; }
+.hidden{display:none}
 
-img {
+img{
   width:100%;
   border-radius:14px;
   margin:12px 0;
 }
 
-button {
+button{
   padding:10px 18px;
   border-radius:22px;
   border:none;
   font-size:16px;
-  margin:10px;
   cursor:pointer;
+  margin:10px;
 }
 
-#yes { background:#ff4d6d;color:white; }
-#no { background:#ddd; position:relative; }
+#yes{background:#ff4d6d;color:#fff}
+#no{background:#ddd;position:relative}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(15px)}
+  to{opacity:1;transform:translateY(0)}
+}
 </style>
 </head>
 
@@ -54,11 +60,21 @@ button {
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_48cba6c7b1.mp3">
 </audio>
 
-<!-- VALENTINE -->
+<!-- START -->
 <div class="container" id="start">
   <h2>Will you be my Valentine? 💌</h2>
   <button id="yes">Yes 💖</button>
   <button id="no">No 💔</button>
+</div>
+
+<!-- ROMANTIC MESSAGE -->
+<div class="container hidden" id="romance">
+  <p>
+    From the moment you walked into my life, <strong>Nandhini</strong>,<br>
+    every heartbeat found its reason.<br><br>
+    This letter asks the question…<br>
+    but my heart already chose you. 💖
+  </p>
 </div>
 
 <!-- JOURNEY -->
@@ -71,60 +87,70 @@ button {
 
 <script>
 const steps = [
- {t:"💫 First Date", img:"first-date.jpeg",
-  d:"From the moment you walked into my life, Nandhini, every heartbeat found its reason."},
+ {t:"💫 First Date",img:"first-date.jpeg",
+  d:"The day two strangers met… and something quietly beautiful began."},
 
- {t:"🥂 First Event Together", img:"first-event.jpeg",
+ {t:"🥂 First Event Together",img:"first-event.jpeg",
   d:"Our first step into the world — side by side."},
 
- {t:"👨‍👩‍👧 Family Meet", img:"family-meet.jpeg",
+ {t:"👨‍👩‍👧 Family Meet",img:"family-meet.jpeg",
   d:"When our worlds met and felt like home."},
 
- {t:"💍 Engagement", img:"engagemet.jpeg",
+ {t:"💍 Engagement",img:"engagemet.jpeg",
   d:"A promise made — with love and forever."},
 
- {t:"📸 Care", img:"care.jpeg",
+ {t:"📸 Care",img:"care.jpeg",
   d:"In the smallest moments, love showed itself."},
 
- {t:"👰🤵 Marriage", img:"marriag.jpeg",
+ {t:"👰🤵 Marriage",img:"marriag.jpeg",
   d:"And finally… we chose each other for a lifetime."}
 ];
 
 let index = 0;
 
-const start = document.getElementById("start");
+const start   = document.getElementById("start");
+const romance = document.getElementById("romance");
 const journey = document.getElementById("journey");
-const title = document.getElementById("title");
-const photo = document.getElementById("photo");
-const text = document.getElementById("text");
-const music = document.getElementById("music");
+const title   = document.getElementById("title");
+const photo   = document.getElementById("photo");
+const text    = document.getElementById("text");
+const nextBtn = document.getElementById("next");
+const music   = document.getElementById("music");
 
-function loadStep() {
+function renderStep(){
   title.textContent = steps[index].t;
   photo.src = steps[index].img;
   text.textContent = steps[index].d;
 }
 
-document.getElementById("yes").onclick = () => {
+document.getElementById("yes").addEventListener("click",()=>{
   music.play();
   start.classList.add("hidden");
-  journey.classList.remove("hidden");
-  index = 0;
-  loadStep();
-};
+  romance.classList.remove("hidden");
 
-document.getElementById("next").onclick = () => {
+  setTimeout(()=>{
+    romance.classList.add("hidden");
+    journey.classList.remove("hidden");
+    index = 0;
+    renderStep();
+  },3000);
+});
+
+nextBtn.addEventListener("click",()=>{
   index++;
-  if (index < steps.length) {
-    loadStep();
-  } else {
-    journey.innerHTML = "<h2>Happy Valentine’s Day ❤️</h2><p>Forever begins with us.</p>";
+  if(index < steps.length){
+    renderStep();
+  }else{
+    title.textContent = "Happy Valentine’s Day ❤️";
+    photo.classList.add("hidden");
+    text.textContent = "Forever begins with us.";
+    nextBtn.classList.add("hidden");
   }
-};
+});
 
-document.getElementById("no").onmouseover = e => {
+document.getElementById("no").addEventListener("mouseover",e=>{
   e.target.style.left = Math.random()*120-60+"px";
-};
+});
 </script>
 
 </body>
