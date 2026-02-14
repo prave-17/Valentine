@@ -142,6 +142,9 @@ img {
 </div>
 
 <script>
+const card = document.getElementById("card");
+const yesPage = document.getElementById("yesPage");
+const noPage = document.getElementById("noPage");
 const noBtn = document.getElementById("no");
 
 noBtn.addEventListener("mouseover", () => {
@@ -149,17 +152,19 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.top = Math.random() * 120 - 60 + "px";
 });
 
-document.getElementById("yes").onclick = () => {
+document.getElementById("yes").addEventListener("click", () => {
   card.classList.add("hidden");
   yesPage.classList.remove("hidden");
-};
+});
 
-document.getElementById("no").onclick = () => {
+document.getElementById("no").addEventListener("click", () => {
   card.classList.add("hidden");
   noPage.classList.remove("hidden");
-};
+});
 </script>
+
 
 </body>
 </html>
+
 
